@@ -10,9 +10,14 @@ Package.on_use(function(api) {
 Package.on_test(function(api) {
   configurePackage(api);
 
-  api.use(['tinytest'], ['client', 'server']);
+  api.use(['tinytest', 'mongo-livedata'], ['client', 'server']);
   api.add_files([
-    'tests/sub_manager.js'
+    'tests/init.js',
+  ], ['server', 'client']);
+
+  api.add_files([
+    'tests/options.js',
+    'tests/core.js'
   ], ['client']);
 });
 
