@@ -1,3 +1,5 @@
+[![](https://api.travis-ci.org/meteorhacks/subs-manager.svg)](https://travis-ci.org/meteorhacks/subs-manager)
+
 # subs-manager
 ### Subscriptions Manager for Meteor
 
