@@ -17,6 +17,8 @@ Tinytest.addAsync('core - multi subscribe', function(test, done) {
   var sm = new SubsManager();
   var subs = {};
 
+  Session.set('sub', 'posts');
+
   Deps.autorun(function(c) {
     var sub = Session.get('sub');
     subs[sub] = true;
@@ -32,7 +34,6 @@ Tinytest.addAsync('core - multi subscribe', function(test, done) {
     }
   });
 
-  Session.set('sub', 'posts');
   Meteor.call('wait', 200, function() {
     Session.set('sub', 'comments');
   });
@@ -41,6 +42,8 @@ Tinytest.addAsync('core - multi subscribe', function(test, done) {
 Tinytest.addAsync('core - multi subscribe but single collection', function(test, done) {
   var sm = new SubsManager();
   var ids = {};
+
+  Session.set('id', 'one');
 
   Deps.autorun(function(c) {
     var id = Session.get('id');
@@ -56,7 +59,6 @@ Tinytest.addAsync('core - multi subscribe but single collection', function(test,
     }
   });
 
-  Session.set('id', 'one');
   Meteor.call('wait', 200, function() {
     Session.set('id', 'two');
   });
