@@ -23,4 +23,13 @@ if(Meteor.isServer) {
   Meteor.publish('singlePoint', function(id) {
     return Points.find(id);
   });
+
+  // using this method since PhantomJS does have support setTimeout
+  Meteor.methods({
+    "wait": function(millis) {
+      Meteor._wrapAsync(function(done) {
+        setTimeout(done, millis);
+      })();
+    }
+  });
 }

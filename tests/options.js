@@ -35,11 +35,11 @@ Tinytest.addAsync('options expireIn - expired', function(test, done) {
   sm._addSub(['comments']);
 
   test.equal(sm._cacheList.length, 2);
-  setTimeout(function() {
+  Meteor.call('wait', 200, function() {
     sm._applyExpirations();
     test.equal(sm._cacheList.length, 0);
     done();
-  }, 200);
+  });
 });
 
 Tinytest.addAsync('options expireIn - not expired', function(test, done) {
@@ -47,11 +47,11 @@ Tinytest.addAsync('options expireIn - not expired', function(test, done) {
   var sm = new SubsManager({cacheLimit: 20, expireIn: 2});
   sm._addSub(['posts']);
   sm._addSub(['comments']);
-  
+
   test.equal(sm._cacheList.length, 2);
-  setTimeout(function() {
+  Meteor.call('wait', 200, function() {
     sm._applyExpirations();
     test.equal(sm._cacheList.length, 2);
     done();
-  }, 200);
+  });
 });

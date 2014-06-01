@@ -33,9 +33,9 @@ Tinytest.addAsync('core - multi subscribe', function(test, done) {
   });
 
   Session.set('sub', 'posts');
-  setTimeout(function() {
+  Meteor.call('wait', 200, function() {
     Session.set('sub', 'comments');
-  }, 400);
+  });
 });
 
 Tinytest.addAsync('core - multi subscribe but single collection', function(test, done) {
@@ -57,7 +57,7 @@ Tinytest.addAsync('core - multi subscribe but single collection', function(test,
   });
 
   Session.set('id', 'one');
-  setTimeout(function() {
+  Meteor.call('wait', 200, function() {
     Session.set('id', 'two');
-  }, 400);
+  });
 });
