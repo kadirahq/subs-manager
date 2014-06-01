@@ -1,0 +1,8 @@
+{
+  "name": "subs-manager",
+  "description": "Subscriptions Manager for Meteor",
+  "homepage": "https://github.com/meteorhacks/subs-manager",
+  "author": "MeteorHacks <hello@meteorhacks.com>",
+  "version": "1.0.0",
+  "git": "https://github.com/meteorhacks/subs-manager.git"
+}
