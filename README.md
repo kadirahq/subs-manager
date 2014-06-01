@@ -15,16 +15,11 @@ So, you need wait a bit even if you've visit that route previously. That's an UX
 
 But also, it will force Meteor server to resend data you already had in the client. It will [waste your server's CPU and network bandwidth](https://kadira.io/academy/reduce-bandwidth-and-cpu-waste/).
 
-See following Video:
-
-
 ## Solution
 
 Subscriptions Manager caches your subscriptions and run all the subscriptions that have been cached when a route gets changed. So when you are switching between routes you don't need to wait anymore. At the sametime Meteor do not resend data you are already have in the client.
 
 In technical terms, Subscriptions Manager runs it's own Deps.autorun computation internally. So it does not interfere with Iron Router and works independently.
-
-See following Video:
 
 ## Usage
 
