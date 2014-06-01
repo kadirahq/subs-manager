@@ -1,3 +1,7 @@
+Tinytest.addAsync('core - init', function(test, done) {
+  Meteor.call('init', done);
+});
+
 Tinytest.addAsync('core - single subscribe', function(test, done) {
   var sm = new SubsManager();
 
