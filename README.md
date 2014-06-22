@@ -19,6 +19,8 @@ Subscriptions Manager caches your subscriptions and run all the subscriptions th
 
 In technical terms, Subscriptions Manager runs it's own Deps.autorun computation internally. So it does not interfere with Iron Router and works independently.
 
+> Subscriptions Manager does not cache your individual data. It tells Meteor to cache the whole subscription. So, your data will get updated in the background as usual.
+
 ## Usage
 
 Install from Atmosphere
