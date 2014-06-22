@@ -1,7 +1,7 @@
 # subs-manager
 ### Subscriptions Manager for Meteor
 
-This is a general-purpose subscriptions manager for Meteor. It also works pretty well with [Iron Router](https://github.com/EventedMind/iron-router).
+This is a general-purpose subscriptions manager for Meteor. It also works pretty well with [Iron Router](https://github.com/EventedMind/iron-router), with some limitations.
 
 ## Why?
 
@@ -58,6 +58,13 @@ Deps.autorun(function() {
   subs.subscribe('singlePost', postId);
 });
 ~~~
+
+## Limitations
+
+Subscription Manager aims to be a drop-in replacement for [`Meteor.subscribe`](http://docs.meteor.com/#meteor_subscribe) (or `this.subscribe()` in Iron Router). At the moment, the following functionality doesn't work (patches welcome):
+
+* `onError` and `onReady` callbacks ([issue](https://github.com/meteorhacks/subs-manager/issues/7))
+* chained [`.wait()`](https://github.com/EventedMind/iron-router/blob/devel/DOCS.md#waiting-on-subscriptions-wait) call in Iron Router ([issue](https://github.com/meteorhacks/subs-manager/issues/6) - you can use `waitOn` instead)
 
 ## Cache Control
 
