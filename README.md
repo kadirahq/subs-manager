@@ -1,33 +1,31 @@
 # subs-manager
 ### Subscriptions Manager for Meteor
 
-This is a general purpose Subscriptions Manager for Meteor. But this works pretty well with Iron Router.
+This is a general-purpose subscriptions manager for Meteor. It also works pretty well with [Iron Router](https://github.com/EventedMind/iron-router).
 
 ## Why?
 
-When you are subscribing inside a `Deps.autorun` computation all the subscriptions started on the previous computation will be stopped.
-In Iron Router all the subscriptions are run inside a Deps.autorun computation, so this will affects to Iron Router.
+When you are subscribing inside a `Deps.autorun` computation, all the subscriptions started on the previous computation will be stopped.
 
-With Iron Router, when you navigate into a new route, all the previous subscriptions will get stopped.
-So, you need wait a bit even if you've visit that route previously. That's an UX issue.
+Iron Router runs all subscriptions inside a `Deps.autorun` computation, so this will affect Iron Router too: when you navigate to a new route, all the previous subscriptions will be stopped. The user will have to wait a bit even if they've visited that route previously. That's an UX issue.
 
-But also, it will force Meteor server to resend data you already had in the client. It will [waste your server's CPU and network bandwidth](https://kadira.io/academy/reduce-bandwidth-and-cpu-waste/).
+Also, this will force the Meteor server to resend data you already had in the client. It will [waste your server's CPU and network bandwidth](https://kadira.io/academy/reduce-bandwidth-and-cpu-waste/).
 
 ## Solution
 
-Subscriptions Manager caches your subscriptions and run all the subscriptions that have been cached when a route gets changed. So when you are switching between routes you don't need to wait anymore. At the sametime Meteor do not resend data you are already have in the client.
+Subscriptions Manager caches your subscriptions and runs all the subscriptions that have been cached when a route is changed. This means that when switching between routes, the user will no longer have to wait. Also, Meteor won't need to re-send data that's already in the client.
 
-In technical terms, Subscriptions Manager runs it's own Deps.autorun computation internally. So it does not interfere with Iron Router and works independently.
+In technical terms, Subscriptions Manager runs it's own `Deps.autorun` computation internally. It does not interfere with Iron Router and works independently.
 
 ## Usage
 
-Install from Atmosphere
+Install from Atmosphere:
 
 ~~~js
 mrt add subs-manager
 ~~~
 
-Using with Iron Router
+Usage with Iron Router: just replace `Meteor.subscribe()` calls with `subs.subscribe()`, where `subs` is a `new SubsManager()`.
 
 ~~~js
 var subs = new SubsManager();
@@ -49,7 +47,7 @@ Router.map(function() {
 })
 ~~~
 
-Using with Deps.autorun
+Using with Deps.autorun:
 
 ~~~js
 var subs = new SubsManager();
@@ -61,7 +59,7 @@ Deps.autorun(function() {
 
 ## Cache Control
 
-Since now you are caching subscriptions, Meteor server will also cache all your client data. But don't worry that's not a huge issue. See this [Kadira Academy article](https://kadira.io/academy/optimize-memory-usage/) to learn more about [V8 and Meteor memory usage](https://kadira.io/academy/optimize-memory-usage/).
+Since now you are caching subscriptions, the Meteor server will also cache all your client data. But don't worry - that's not a huge issue. See this [Kadira Academy article](https://kadira.io/academy/optimize-memory-usage/) to learn more about [V8 and Meteor memory usage](https://kadira.io/academy/optimize-memory-usage/).
 
 But, you should have the capability to control the cache. Subscriptions Manager does that.
 
@@ -74,20 +72,20 @@ var subs = new SubsManager({
 });
 ~~~
 
-> above values are the default values for each option.
+The above values are the default values for each option.
 
 ## Patterns for using SubsManager
 
 ### Using a global Subscription Manager
 
-You can create a global subscription just like I shown in the previously on the Iron Router usage example. By doing that, all your subscriptions are handle alike.
+You can create a global subscription manager as shown in the Iron Router example. By doing that, all your subscriptions are handled the same way.
 
 ### Using separate Subscription Managers
 
-If you need more control over caching, you can create separate Subscription Managers for each set of subscriptions and manage them differently. For an example,
+If you need more control over caching, you can create separate Subscription Managers for each set of subscriptions and manage them differently. For example,
 
 * you can cache home page subscriptions indefinitely
-* But you can control the cache for other routes
+* but you can control the cache for other routes
 
 ~~~js
 var homeSubs = new SubsManager({cacheLimit: 9999, expireIn: 9999});
@@ -112,9 +110,9 @@ Router.map(function() {
 
 ### Cache subscriptions you only need
 
-With Subscription Manager you don't need to use it everywhere. Simply use it wherever you need while without changing other subscriptions.
+With Subscription Manager you don't need to use it everywhere. Simply use it wherever you need without changing other subscriptions.
 
-For an example, I need to use Subscription Manager for the home page only.
+For example, to only use Subscription Manager for the home page:
 
 ~~~js
 var subs = new SubsManager();
@@ -130,7 +128,7 @@ Router.map(function() {
     path: '/post/:id',
     waitOn: function() {
       // These subscriptions will be handled by Iron Router
-      // and does not affects with the Subscription Manager subscriptions
+      // and do not interfere with the Subscription Manager subscriptions
       return Meteor.subscribe('singlePost', this.params.id);
     }
   });
