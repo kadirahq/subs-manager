@@ -1,5 +1,5 @@
 Package.describe({
-  "summary": "Subscription Manager for Meteor"
+  "summary": "Subscriptions Manager for Meteor"
 });
 
 Package.on_use(function(api) {
@@ -22,7 +22,7 @@ Package.on_test(function(api) {
 });
 
 function configurePackage(api) {
-  api.use(['deps'], ['client', 'server']);
+  api.use(['deps', 'underscore'], ['client', 'server']);
   api.add_files([
     'lib/sub_manager.js',
   ], ['client', 'server']);
