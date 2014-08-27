@@ -21,10 +21,12 @@ In technical terms, Subscriptions Manager runs it's own `Deps.autorun` computati
 
 ## Usage
 
-Install from Atmosphere:
+Installation
 
 ~~~js
-mrt add subs-manager
+meteor add meteorhacks:subs-manager
+# if you've not yet migrated to Meteor 0.9, apply following:
+# mrt add subs-manager
 ~~~
 
 Usage with Iron Router: just replace `Meteor.subscribe()` calls with `subs.subscribe()`, where `subs` is a `new SubsManager()`.
