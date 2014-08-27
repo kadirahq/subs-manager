@@ -1,5 +1,8 @@
 Package.describe({
-  "summary": "Subscriptions Manager for Meteor"
+  "summary": "Subscriptions Manager for Meteor",
+  "version": "1.1.0",
+  "git": "https://github.com/meteorhacks/subs-manager.git",
+  "name": "meteorhacks:subs-manager"
 });
 
 Package.on_use(function(api) {
@@ -22,6 +25,10 @@ Package.on_test(function(api) {
 });
 
 function configurePackage(api) {
+  if(api.versionsFrom) {
+    api.versionsFrom('METEOR@0.9.0');
+  }
+  
   api.use(['deps', 'underscore'], ['client', 'server']);
   api.add_files([
     'lib/sub_manager.js',
