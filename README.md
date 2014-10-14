@@ -61,6 +61,21 @@ Deps.autorun(function() {
 });
 ~~~
 
+### Resetting
+
+Sometime, we need to re-run our subscriptions may be after some major activity in the app.
+
+> Eg:- After a user has update the plan.
+
+In those situations, you can reset Subscription Manager.
+
+~~~js
+var subs = new SubsManager();
+
+// later in some other place
+subs.reset();
+~~~
+
 ## Limitations
 
 Subscription Manager aims to be a drop-in replacement for [`Meteor.subscribe`](http://docs.meteor.com/#meteor_subscribe) (or `this.subscribe()` in Iron Router). At the moment, the following functionality doesn't work (patches welcome):

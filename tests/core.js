@@ -67,3 +67,33 @@ Tinytest.addAsync('core - multi subscribe but single collection', function(test,
     Session.set('id', 'two');
   });
 });
+
+Tinytest.addAsync('core - a - resetting', function(test, done) {
+  var sm = new SubsManager();
+  var allowed = false;
+
+  Meteor.call('postsOnlyAllowed.allow', false, function() {
+    Deps.autorun(function(c) {
+      var status = sm.subscribe('postsOnlyAllowed');
+      var readyState = status.ready();
+
+      if(!allowed) {
+        if(readyState) {
+          var posts = PostsOnlyAllowed.find().fetch();
+          test.equal(posts, []);
+          allowed = true;
+          Meteor.call('postsOnlyAllowed.allow', true, function() {
+            sm.reset();
+          });
+        }
+      } else {
+        var posts = PostsOnlyAllowed.find().fetch();
+        if(posts.length == 1) {
+          test.equal(posts, [{_id: 'one'}]);
+          c.stop();
+          Meteor.defer(done);
+        }
+      }
+    });   
+  });
+});
