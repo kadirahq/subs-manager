@@ -68,7 +68,7 @@ Tinytest.addAsync('core - multi subscribe but single collection', function(test,
   });
 });
 
-Tinytest.addAsync('core - a - resetting', function(test, done) {
+Tinytest.addAsync('core - resetting', function(test, done) {
   var sm = new SubsManager();
   var allowed = false;
 
