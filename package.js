@@ -29,7 +29,7 @@ function configurePackage(api) {
     api.versionsFrom('METEOR@0.9.0');
   }
   
-  api.use(['deps', 'underscore'], ['client', 'server']);
+  api.use(['deps', 'underscore', 'ejson'], ['client', 'server']);
   api.add_files([
     'lib/sub_manager.js',
   ], ['client', 'server']);
