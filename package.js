@@ -1,6 +1,6 @@
 Package.describe({
   "summary": "Subscriptions Manager for Meteor",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "git": "https://github.com/meteorhacks/subs-manager.git",
   "name": "meteorhacks:subs-manager"
 });
@@ -20,7 +20,8 @@ Package.on_test(function(api) {
 
   api.add_files([
     'tests/options.js',
-    'tests/core.js'
+    'tests/core.js',
+    'tests/error.js'
   ], ['client']);
 });
 

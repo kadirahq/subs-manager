@@ -25,6 +25,10 @@ if(Meteor.isServer) {
     return Points.find(id);
   });
 
+  Meteor.publish('error-one', function(id) {
+    throw new Meteor.Error(400, "dddd");
+  });
+
   // using this method since PhantomJS does have support setTimeout
   Meteor.methods({
     "wait": function(millis) {
