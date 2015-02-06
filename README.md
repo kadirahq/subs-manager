@@ -1,5 +1,6 @@
-# subs-manager
-### Subscriptions Manager for Meteor
+# SubsManager [![Build Status](https://travis-ci.org/meteorhacks/subs-manager.svg?branch=master)](https://travis-ci.org/meteorhacks/subs-manager)
+
+####  Subscriptions Manager for Meteor
 
 This is a general-purpose subscriptions manager for Meteor. It also works pretty well with [Iron Router](https://github.com/EventedMind/iron-router), with some limitations.
 
