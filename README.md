@@ -76,6 +76,17 @@ var subs = new SubsManager();
 subs.reset();
 ~~~
 
+### Clear Subscriptions
+
+In somecases, we need to clear the all the subscriptions we cache. So, this is how we can do it.
+
+~~~js
+var subs = new SubsManager();
+
+// later in some other place
+subs.clear();
+~~~
+
 ## Limitations
 
 Subscription Manager aims to be a drop-in replacement for [`Meteor.subscribe`](http://docs.meteor.com/#meteor_subscribe) (or `this.subscribe()` in Iron Router). At the moment, the following functionality doesn't work (patches welcome):

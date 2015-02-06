@@ -11,6 +11,7 @@ Tinytest.add('options cacheLimit - exceed', function(test) {
     return sub.args[0];
   });
   test.equal(subsIds, ['comments', 'singlePoint']);
+  sm.clear();
 });
 
 Tinytest.add('options cacheLimit - not-exceed', function(test) {
@@ -26,6 +27,7 @@ Tinytest.add('options cacheLimit - not-exceed', function(test) {
     return sub.args[0];
   });
   test.equal(subsIds, ['posts', 'comments', 'singlePoint']);
+  sm.clear();
 });
 
 Tinytest.addAsync('options expireIn - expired', function(test, done) {
@@ -38,6 +40,7 @@ Tinytest.addAsync('options expireIn - expired', function(test, done) {
   Meteor.call('wait', 200, function() {
     sm._applyExpirations();
     test.equal(sm._cacheList.length, 0);
+    sm.clear();
     done();
   });
 });
@@ -52,6 +55,7 @@ Tinytest.addAsync('options expireIn - not expired', function(test, done) {
   Meteor.call('wait', 200, function() {
     sm._applyExpirations();
     test.equal(sm._cacheList.length, 2);
+    sm.clear();
     done();
   });
 });

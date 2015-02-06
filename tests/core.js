@@ -10,12 +10,13 @@ Tinytest.addAsync('core - single subscribe', function(test, done) {
     if(status.ready()) {
       var posts = Posts.find().fetch();
       test.equal(posts, [{_id: 'one'}]);
+
+      sm.clear();
       c.stop();
       Meteor.defer(done);
     }
   });
 });
-
 
 Tinytest.addAsync('core - multi subscribe', function(test, done) {
   var sm = new SubsManager();
@@ -32,6 +33,8 @@ Tinytest.addAsync('core - multi subscribe', function(test, done) {
       if(handler.ready()) {
         test.equal(Posts.find().count(), 1);
         test.equal(Comments.find().count(), 1);
+
+        sm.clear();
         c.stop();
         Meteor.defer(done);
       }
@@ -90,10 +93,34 @@ Tinytest.addAsync('core - resetting', function(test, done) {
         var posts = PostsOnlyAllowed.find().fetch();
         if(posts.length == 1) {
           test.equal(posts, [{_id: 'one'}]);
+
+          sm.clear();
           c.stop();
           Meteor.defer(done);
         }
       }
-    });   
+    });
   });
+});
+
+Tinytest.addAsync('core - clear subscriptions', function(test, done) {
+  var sm = new SubsManager();
+
+  Deps.autorun(function(c) {
+    var status = sm.subscribe('posts');
+    if(status.ready()) {
+      var posts = Posts.find().fetch();
+      test.equal(posts, [{_id: 'one'}]);
+
+      sm.clear();
+      c.stop();
+      setTimeout(checkPostsAgain, 200);
+    }
+  });
+
+  function checkPostsAgain() {
+    var postCount = Posts.find({_id: "one"}).count();
+    test.equal(postCount, 0);
+    done();
+  }
 });

@@ -9,6 +9,7 @@ Tinytest.addAsync('subs with error - mix of error and non error', function(test,
     var status = subscribeToErrorOne();
     status = sm.subscribe('posts');
     if(status.ready()) {
+      sm.clear();
       c.stop();
       Meteor.defer(done);
     }
@@ -26,6 +27,7 @@ Tinytest.addAsync('subs with error - with existing ready callback', function(tes
     var status = subscribeToErrorOne();
     status = sm.subscribe('posts');
     if(status.ready()) {
+      sm.clear();
       c.stop();
       Meteor.defer(done);
     }
@@ -43,6 +45,7 @@ Tinytest.addAsync('subs with error - with existing onReady', function(test, done
     var status = subscribeToErrorOne();
     status = sm.subscribe('posts');
     if(status.ready()) {
+      sm.clear();
       c.stop();
       Meteor.defer(done);
     }
@@ -62,6 +65,8 @@ Tinytest.addAsync('subs with error - with existing onError', function(test, done
     status = sm.subscribe('posts');
     if(status.ready()) {
       test.isTrue(called);
+
+      sm.clear();
       c.stop();
       Meteor.defer(done);
     }
@@ -79,6 +84,7 @@ Tinytest.addAsync('subs with error - with some args', function(test, done) {
     var status = subscribeToErrorOne();
     status = sm.subscribe('posts');
     if(status.ready()) {
+      sm.clear();
       c.stop();
       Meteor.defer(done);
     }
@@ -100,7 +106,8 @@ Tinytest.addAsync('subs with error - just the error sub', function(test, done) {
   });
 
   Meteor.setTimeout(function() {
+    sm.clear();
     c.stop();
     Meteor.defer(done);
   }, 100);
-}); 
+});
