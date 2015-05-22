@@ -32,7 +32,7 @@ if(Meteor.isServer) {
   // using this method since PhantomJS does have support setTimeout
   Meteor.methods({
     "wait": function(millis) {
-      Meteor._wrapAsync(function(done) {
+      Meteor.wrapAsync(function(done) {
         setTimeout(done, millis);
       })();
     },
