@@ -31,7 +31,7 @@ function configurePackage(api) {
   }
   
   api.use(['deps', 'underscore', 'ejson'], ['client', 'server']);
-  api.use('meteorhacks:fast-render@2.6.0', 'client', {weak: true});
+  api.use('meteorhacks:fast-render@2.7.0', 'client', {weak: true});
   
   api.add_files([
     'lib/sub_manager.js',
