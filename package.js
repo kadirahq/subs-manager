@@ -1,6 +1,6 @@
 Package.describe({
   "summary": "Subscriptions Manager for Meteor",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "git": "https://github.com/meteorhacks/subs-manager.git",
   "name": "meteorhacks:subs-manager"
 });
