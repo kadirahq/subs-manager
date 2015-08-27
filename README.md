@@ -172,3 +172,19 @@ Router.map(function() {
   });
 })
 ~~~
+
+### Using global ready checking
+
+You can also check the ready status of all the subscriptions at once like this:
+
+~~~js
+var subs = new SubsManager();
+subs.subscribe('postList');
+subs.subscribe('singlePost', 'id1');
+
+Tracker.autorun(function() {
+  if(subs.ready()) {
+    // all the subscriptions are ready to use.
+  }
+});
+~~~
