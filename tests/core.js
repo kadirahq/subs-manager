@@ -46,7 +46,7 @@ Tinytest.addAsync('core - multi subscribe', function(test, done) {
   });
 });
 
-Tinytest.addAsync('core - global ready method', function(test, done) {
+Tinytest.addAsync('core - global ready method - basic usage', function(test, done) {
   var sm = new SubsManager();
 
   Deps.autorun(function(c) {
@@ -62,7 +62,7 @@ Tinytest.addAsync('core - global ready method', function(test, done) {
   });
 });
 
-Tinytest.addAsync('core - global ready method and change it - aa', function(test, done) {
+Tinytest.addAsync('core - global ready method - and change it - aa', function(test, done) {
   var sm = new SubsManager();
   var readyCalledOnce = false;
 
@@ -83,6 +83,12 @@ Tinytest.addAsync('core - global ready method and change it - aa', function(test
       Meteor.defer(done);
     }
   });
+});
+
+Tinytest.addAsync('core - global ready method - initial state', function(test, done) {
+  var sm = new SubsManager();
+  test.equal(sm.ready(), false);
+  done();
 });
 
 Tinytest.addAsync('core - multi subscribe but single collection', function(test, done) {
