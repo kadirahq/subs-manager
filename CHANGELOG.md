@@ -1,5 +1,11 @@
 # Change Log
 
+### v1.6.1
+
+* Add reactive changes related improvements
+ - Make subs.ready() === false if there is no subs inside the subscription
+ - Fire dep.changed() very carefully to avoid reactive loops
+
 ### v1.6.0
 
 * Add gloabl `.ready()` api where we check the ready status of the whole subsManager at anytime.
