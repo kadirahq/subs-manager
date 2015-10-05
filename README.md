@@ -1,4 +1,4 @@
-# SubsManager [![Build Status](https://travis-ci.org/kadirahq/subs-manager.svg?branch=master)](https://travis-ci.org/meteorhacks/subs-manager)
+# SubsManager [![Build Status](https://travis-ci.org/kadirahq/subs-manager.svg?branch=master)](https://travis-ci.org/kadirahq/subs-manager)
 
 ####  Subscriptions Manager for Meteor
 
