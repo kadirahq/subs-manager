@@ -6,9 +6,9 @@ This is a general-purpose subscriptions manager for Meteor. It also works pretty
 
 ## Why?
 
-When you are subscribing inside a `Deps.autorun` computation, all the subscriptions started on the previous computation will be stopped.
+When you are subscribing inside a `Tracker.autorun` computation, all the subscriptions started on the previous computation will be stopped.
 
-Iron Router runs all subscriptions inside a `Deps.autorun` computation, so this will affect Iron Router too: when you navigate to a new route, all the previous subscriptions will be stopped. The user will have to wait a bit even if they've visited that route previously. That's an UX issue.
+Iron Router runs all subscriptions inside a `Tracker.autorun` computation, so this will affect Iron Router too: when you navigate to a new route, all the previous subscriptions will be stopped. The user will have to wait a bit even if they've visited that route previously. That's an UX issue.
 
 Also, this will force the Meteor server to resend data you already had in the client. It will [waste your server's CPU and network bandwidth](https://kadira.io/academy/reduce-bandwidth-and-cpu-waste/).
 
@@ -16,7 +16,7 @@ Also, this will force the Meteor server to resend data you already had in the cl
 
 Subscriptions Manager caches your subscriptions and runs all the subscriptions that have been cached when a route is changed. This means that when switching between routes, the user will no longer have to wait. Also, Meteor won't need to re-send data that's already in the client.
 
-In technical terms, Subscriptions Manager runs it's own `Deps.autorun` computation internally. It does not interfere with Iron Router and works independently.
+In technical terms, Subscriptions Manager runs it's own `Tracker.autorun` computation internally. It does not interfere with Iron Router and works independently.
 
 > Subscriptions Manager does not cache your individual data. It tells Meteor to cache the whole subscription. So, your data will get updated in the background as usual.
 
@@ -52,11 +52,11 @@ Router.map(function() {
 })
 ~~~
 
-Using with Deps.autorun:
+Using with Tracker.autorun:
 
 ~~~js
 var subs = new SubsManager();
-Deps.autorun(function() {
+Tracker.autorun(function() {
   var postId = Session.get('postId');
   subs.subscribe('singlePost', postId);
 });
@@ -171,4 +171,20 @@ Router.map(function() {
     }
   });
 })
+~~~
+
+### Using global ready checking
+
+You can also check the ready status of all the subscriptions at once like this:
+
+~~~js
+var subs = new SubsManager();
+subs.subscribe('postList');
+subs.subscribe('singlePost', 'id1');
+
+Tracker.autorun(function() {
+  if(subs.ready()) {
+    // all the subscriptions are ready to use.
+  }
+});
 ~~~
