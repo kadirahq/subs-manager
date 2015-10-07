@@ -103,9 +103,9 @@ But, you should have the capability to control the cache. Subscriptions Manager 
 
 ~~~js
 var subs = new SubsManager({
-    // maximum number of cache subscriptions
+    // maximum number of cache subscriptions, use 0 for unlimited
     cacheLimit: 10,
-    // any subscription will be expire after 5 minute, if it's not subscribed again
+    // any subscription will be expire after 5 minute, if it's not subscribed again, use 0 to never expire
     expireIn: 5
 });
 ~~~

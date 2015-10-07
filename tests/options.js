@@ -59,3 +59,17 @@ Tinytest.addAsync('options expireIn - not expired', function(test, done) {
     done();
   });
 });
+
+Tinytest.add('options expireIn - no expiration: expireIn set to 0', function(test) {
+  // expireIn 2 minutes
+  var sm = new SubsManager({expireIn: 0});
+
+  test.equal(sm.options.expireIn, 0);
+});
+
+Tinytest.add('options expireIn - no limit: cacheLimit set to 0', function(test) {
+  // expireIn 2 minutes
+  var sm = new SubsManager({cacheLimit: 0});
+
+  test.equal(sm.options.cacheLimit, 0);
+});
