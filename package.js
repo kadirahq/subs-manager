@@ -13,7 +13,7 @@ Package.on_use(function(api) {
 Package.on_test(function(api) {
   configurePackage(api);
 
-  api.use(['tinytest', 'mongo-livedata'], ['client', 'server']);
+  api.use(['tinytest', 'mongo-livedata', 'session'], ['client', 'server']);
   api.add_files([
     'tests/init.js',
   ], ['server', 'client']);
