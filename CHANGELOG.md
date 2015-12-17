@@ -1,5 +1,10 @@
 # Change Log
 
+### v1.6.3
+
+* Fix failing tests.
+* Update documentation.
+
 ### v1.6.2
 
 * the feature of `subs.ready() === false` at initially causing SSR to not work properly. This version fix that. 
