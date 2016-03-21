@@ -1,5 +1,10 @@
 # Change Log
 
+### v1.6.4
+2016-March-21
+
+* Fix minor typo in the code related to cacheMap.
+
 ### v1.6.3
 
 * Fix failing tests.
